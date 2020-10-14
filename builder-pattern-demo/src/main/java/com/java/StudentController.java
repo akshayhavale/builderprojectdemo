@@ -18,6 +18,12 @@ import com.java.repository.StudentRepository;
 @RestController
 @RequestMapping("/api")
 public class StudentController {
+	/**
+	 * i can also use volatile keyword to create thread safe class insted of doing
+	 * like in post method 
+	 * Student student =student = new Student.Builder().setName(studentDto.getName()).setActive(studentDto.isActive()).build();
+	 */
+	volatile Student student;
 
 	@Autowired
 	private StudentRepository repository;
@@ -26,7 +32,7 @@ public class StudentController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public @ResponseBody Student createStudent(@RequestBody StudentDto studentDto) {
 
-		Student student = new Student.Builder().setName(studentDto.getName()).setActive(studentDto.isActive()).build();
+		student = new Student.Builder().setName(studentDto.getName()).setActive(studentDto.isActive()).build();
 		return repository.save(student);
 	}
 
