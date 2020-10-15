@@ -20,10 +20,11 @@ import com.java.repository.StudentRepository;
 public class StudentController {
 	/**
 	 * i can also use volatile keyword to create thread safe class insted of doing
-	 * like in post method 
-	 * Student student =student = new Student.Builder().setName(studentDto.getName()).setActive(studentDto.isActive()).build();
+	 * like in post method Student student =student = new
+	 * Student.Builder().setName(studentDto.getName()).setActive(studentDto.isActive()).build();
+	 * 
+	 * you can use volatile Student student;
 	 */
-	volatile Student student;
 
 	@Autowired
 	private StudentRepository repository;
@@ -32,7 +33,7 @@ public class StudentController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public @ResponseBody Student createStudent(@RequestBody StudentDto studentDto) {
 
-		student = new Student.Builder().setName(studentDto.getName()).setActive(studentDto.isActive()).build();
+		Student student = new Student.Builder().setName(studentDto.getName()).setActive(studentDto.isActive()).build();
 		return repository.save(student);
 	}
 
